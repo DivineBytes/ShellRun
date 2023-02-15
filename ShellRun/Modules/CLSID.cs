@@ -138,7 +138,7 @@ namespace ShellRun.Modules
             {
                 string argument = CreateCommand(guid);
 
-                ProcessStartInfo processStartInfo = new ProcessStartInfo("explorer.exe")
+                ProcessStartInfo processStartInfo = new ProcessStartInfo(FileExplorer.Explorer)
                 {
                     Arguments = argument,
                     WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Windows)

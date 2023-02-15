@@ -10,7 +10,7 @@ namespace ShellRun.Utilities
     public class FileExplorer
     {
         /// <summary>The file explorer.</summary>
-        public const string Explorer = "Explorer.exe";
+        public const string Explorer = "explorer.exe";
 
         /// <summary>Opens the Windows File Explorer at the specified directory. Optional allows setting a selected file.</summary>
         /// <param name="directory">The directory path.</param>
