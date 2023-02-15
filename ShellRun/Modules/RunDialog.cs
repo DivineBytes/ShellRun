@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using ShellRun.Containers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -60,7 +61,7 @@ namespace ShellRun.Modules
         public static extern bool SHRunFileDialog(IntPtr hwndOwner, IntPtr hIcon, string lpszPath, string lpszDialogTitle, string lpszDialogTextBody, RunFileDialogFlags uflags);
 
         /// <summary>
-        /// Shows the Run Dialog.
+        /// Shows the custom Run Dialog.
         /// </summary>
         /// <param name="text">The dialog body text.</param>
         /// <param name="title">The dialog title.</param>
@@ -74,6 +75,23 @@ namespace ShellRun.Modules
             }
 
             SHRunFileDialog(IntPtr.Zero, IntPtr.Zero, workingDirectory, title, text, runFileDialogFlags);
+        }
+
+        /// <summary>
+        /// Opens the Run Dialog.
+        /// </summary>
+        public static bool Open()
+        {
+            try
+            {
+               return CLSIDS.Run.Open();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return false;
         }
 
         /// <summary>
