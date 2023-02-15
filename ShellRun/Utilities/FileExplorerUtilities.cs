@@ -5,9 +5,9 @@ using System.IO;
 namespace ShellRun.Utilities
 {
     /// <summary>
-    ///     The <see cref="FileExplorer" /> class.
+    ///     The <see cref="FileExplorerUtilities" /> class.
     /// </summary>
-    public class FileExplorer
+    public class FileExplorerUtilities
     {
         /// <summary>The file explorer.</summary>
         public const string Explorer = "explorer.exe";
@@ -86,6 +86,7 @@ namespace ShellRun.Utilities
             }
 
             string argument = string.Empty;
+            string explorer = Path.Combine(Windows.FullName, Explorer);
 
             try
             {
@@ -100,8 +101,12 @@ namespace ShellRun.Utilities
                         argument = "/select, \"" + filePath + "\"";
                     }
                 }
+                else
+                {
+                    argument = directoryPath;
+                }
 
-                Process.Start(Path.Combine(Windows.FullName, Explorer), argument);
+                Process.Start(explorer, argument);
                 return true;
             }
             catch (Exception e)
