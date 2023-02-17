@@ -55,7 +55,7 @@
     <Compile Include="Containers\ControlPanels.cs" />
     <Compile Include="Containers\MMC.cs" />
     <Compile Include="Containers\MSSettings.cs" />
-    <Compile Include="Containers\RunDLLs.cs" />
+    <Compile Include="Containers\RunDLL32s.cs" />
     <Compile Include="Containers\Shells.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Modules\Batch.cs" />
@@ -63,7 +63,7 @@
     <Compile Include="Base\CommandBase.cs" />
     <Compile Include="Modules\ControlPanelApplet.cs" />
     <Compile Include="Modules\NETFramework.cs" />
-    <Compile Include="Modules\RunDLL.cs" />
+    <Compile Include="Modules\RunDLL32.cs" />
     <Compile Include="Modules\PowerShell.cs" />
     <Compile Include="Modules\RunDialog.cs" />
     <Compile Include="Modules\VBScript.cs" />

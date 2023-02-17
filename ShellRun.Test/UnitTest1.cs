@@ -42,7 +42,7 @@ namespace ShellRun.Test
         [Test]
         public void RunDll32Test()
         {
-            var x = RunDLLs.AddRemovePrograms.Start();
+            var x = RunDLL32s.AddRemovePrograms.Start();
             Assert.IsTrue(x);
         }
 

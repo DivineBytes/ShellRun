@@ -8,8 +8,8 @@ namespace ShellRun.Containers
     /// </summary>
 #pragma warning disable 1591
 
-    public static class RunDLLs
+    public static class RunDLL32s
     {
-        public static RunDLL AddRemovePrograms = new RunDLL("shell32.dll", "Control_RunDLL", "appwiz.cpl,,0");
+        public static RunDLL32 AddRemovePrograms = new RunDLL32("shell32.dll", "Control_RunDLL", "appwiz.cpl,,0");
     }
 }

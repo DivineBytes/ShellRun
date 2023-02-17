@@ -1,6 +1,6 @@
 <h1 align="center">ShellRun</h1>
 
-<p align="center">Automate the running of shell commands.</p>
+<p align="center">Automates the running of code, shell commands and scripts.</p>
 
 <p align="center">
 <img src="ShellRun\Resources\Logo.png" alt="Logo" width="64" />
@@ -14,12 +14,15 @@
 
 <h2 align="center">⭐ Features ⭐</h2>
 
-
-<ul align="center">
-  <li>Batch</li>
-  <li>PowerShell</li>
-  <li>VBScript</li>
-</ul>
+<p align="center">CLSID</p>
+<p align="center">Code (C#, Visual Basic)</p>
+<p align="center">Control Panel Applet</p>
+<p align="center">Microsoft Management Console</p>
+<p align="center">MS-Setting</p>
+<p align="center">Run Dialog</p>
+<p align="center">RunDLL32</p>
+<p align="center">Scripts (Command Prompt, PowerShell, VBScript)</p>
+<p align="center">Shell</p>
 
 <h2 align="center">⚖️ License ⚖️</h2>
 

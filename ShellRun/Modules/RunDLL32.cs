@@ -6,10 +6,10 @@ using System.IO;
 namespace ShellRun.Modules
 {
     /// <summary>
-    /// The <see cref="RunDLL" /> class.
+    /// The <see cref="RunDLL32" /> class.
     /// </summary>
     /// <seealso cref="ShellRun.Base.CommandBase" />
-    public class RunDLL : CommandBase
+    public class RunDLL32 : CommandBase
     {
         /// <summary>
         /// The executable file.
@@ -19,19 +19,19 @@ namespace ShellRun.Modules
         /// <summary>
         /// The empty RunDLL.
         /// </summary>
-        public static RunDLL Empty = new RunDLL();
+        public static RunDLL32 Empty = new RunDLL32();
 
         /// <summary>
-        /// The <see cref="RunDLL" />.
+        /// The <see cref="RunDLL32" />.
         /// </summary>
         /// <param name="dllName">The dll file.</param>
         /// <param name="entryPoint">The dll entry point.</param>
-        public RunDLL(string dllName, string entryPoint) : this(dllName, entryPoint, string.Empty)
+        public RunDLL32(string dllName, string entryPoint) : this(dllName, entryPoint, string.Empty)
         {
         }
 
         /// <summary>
-        /// The <see cref="RunDLL" />.
+        /// The <see cref="RunDLL32" />.
         /// </summary>
         /// <param name="dllName">The dll file.</param>
         /// <param name="entryPoint">The dll entry point.</param>
@@ -43,7 +43,7 @@ namespace ShellRun.Modules
         /// or
         /// arguments - Cannot be null.
         /// </exception>
-        public RunDLL(string dllName, string entryPoint, string arguments = "") : this()
+        public RunDLL32(string dllName, string entryPoint, string arguments = "") : this()
         {
             if (string.IsNullOrEmpty(dllName))
             {
@@ -66,9 +66,9 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// The <see cref="RunDLL" />.
+        /// The <see cref="RunDLL32" />.
         /// </summary>
-        private RunDLL()
+        private RunDLL32()
         {
             DLLName = string.Empty;
             EntryPoint = string.Empty;
