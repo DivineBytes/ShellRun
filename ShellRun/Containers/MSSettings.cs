@@ -5,6 +5,8 @@ namespace ShellRun.Containers
     /// <summary>
     /// The <see cref="MSSettings"/> class.
     /// </summary>
+#pragma warning disable 1591
+
     public static class MSSettings
     {
         public static MSSetting About = new MSSetting("About", "ms-settings:about");

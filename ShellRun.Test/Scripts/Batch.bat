@@ -1,5 +1,5 @@
-﻿@ECHO OFF
+@ECHO OFF
 TITLE Batch Test
-ECHO Hello World.
+ECHO Hello, World!
 ECHO.
 PAUSE

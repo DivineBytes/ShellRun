@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ShellRun.Attributes
+namespace ShellRun.Test.Attributes
 {
     [AttributeUsage(AttributeTargets.All)]
     public class NotTestedAttribute : Attribute
@@ -36,6 +32,8 @@ namespace ShellRun.Attributes
             _description = displayName;
         }
 
+#pragma warning disable 8765
+
         public override bool Equals(object obj)
         {
             if (obj == this)
@@ -43,8 +41,7 @@ namespace ShellRun.Attributes
                 return true;
             }
 
-            NotTestedAttribute displayNameAttribute = obj as NotTestedAttribute;
-            if (displayNameAttribute != null)
+            if (obj is NotTestedAttribute displayNameAttribute)
             {
                 return displayNameAttribute.Description == Description;
             }

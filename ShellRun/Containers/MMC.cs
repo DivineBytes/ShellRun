@@ -6,6 +6,8 @@ namespace ShellRun.Containers
     /// <summary>
     /// The <see cref="MMC"/> class.
     /// </summary>
+#pragma warning disable 1591
+
     public static class MMC
     {
         public static MicrosoftManagementConsole ADDomainsAndTrusts = new MicrosoftManagementConsole("AD Domains and Trusts", "Domain.msc", new List<string> { MicrosoftManagementConsole.Category.ADConfiguration });

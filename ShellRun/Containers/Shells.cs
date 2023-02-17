@@ -5,6 +5,8 @@ namespace ShellRun.Containers
     /// <summary>
     /// The <see cref="Shells"/> class.
     /// </summary>
+#pragma warning disable 1591
+
     public static class Shells
     {
         public static Shell AccountPictures = new Shell("AccountPictures", "{008CA0B1-55B4-4C56-B8A8-4DE4B299D3BE}", "", "%AppData%\\Microsoft\\Windows\\AccountPictures");

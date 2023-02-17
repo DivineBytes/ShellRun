@@ -5,35 +5,45 @@ using System.IO;
 namespace ShellRun.Utilities
 {
     /// <summary>
-    ///     The <see cref="FileExplorerUtilities" /> class.
+    /// The <see cref="FileExplorerUtilities"/> class.
     /// </summary>
     public class FileExplorerUtilities
     {
-        /// <summary>The file explorer.</summary>
+        /// <summary>
+        /// The file explorer.
+        /// </summary>
         public const string Explorer = "explorer.exe";
 
-        /// <summary>Opens the Windows File Explorer at the specified directory. Optional allows setting a selected file.</summary>
+        /// <summary>
+        /// Opens the Windows File Explorer at the specified directory. Optional allows setting a
+        /// selected file.
+        /// </summary>
         /// <param name="directory">The directory path.</param>
         /// <param name="selectFile">Toggle file selection.</param>
         /// <param name="fileName">The file name.</param>
-        /// <returns>The <see cref="bool" />.</returns>
+        /// <returns>The <see cref="bool"/>.</returns>
         public static bool Show(DirectoryInfo directory, bool selectFile = false, string fileName = "")
         {
             return Show(directory.FullName, selectFile, fileName);
         }
 
-        /// <summary>Opens the Windows File Explorer at the specified directory. Optional allows setting a selected file.</summary>
+        /// <summary>
+        /// Opens the Windows File Explorer at the specified directory. Optional allows setting a
+        /// selected file.
+        /// </summary>
         /// <param name="fileInfo">The file info.</param>
         /// <param name="selectFile">Toggle file selection.</param>
-        /// <returns>The <see cref="bool" />.</returns>
+        /// <returns>The <see cref="bool"/>.</returns>
         public static bool Show(FileInfo fileInfo, bool selectFile = false)
         {
             return Show(fileInfo.Directory, selectFile, fileInfo.Name);
         }
 
-        /// <summary>Opens the Windows File Explorer with the default program.</summary>
+        /// <summary>
+        /// Opens the Windows File Explorer with the default program.
+        /// </summary>
         /// <param name="path">The file path.</param>
-        /// <returns>The <see cref="bool" />.</returns>
+        /// <returns>The <see cref="bool"/>.</returns>
         public static bool OpenWithDefaultProgram(string path)
         {
             if (string.IsNullOrEmpty(path))
@@ -68,11 +78,14 @@ namespace ShellRun.Utilities
             return false;
         }
 
-        /// <summary>Opens the Windows File Explorer at the specified directory. Optional allows setting a selected file.</summary>
+        /// <summary>
+        /// Opens the Windows File Explorer at the specified directory. Optional allows setting a
+        /// selected file.
+        /// </summary>
         /// <param name="directoryPath">The directory path.</param>
         /// <param name="selectFile">Toggle file selection.</param>
         /// <param name="fileName">The file name.</param>
-        /// <returns>The <see cref="bool" />.</returns>
+        /// <returns>The <see cref="bool"/>.</returns>
         public static bool Show(string directoryPath, bool selectFile = false, string fileName = "")
         {
             if (string.IsNullOrEmpty(directoryPath))
@@ -117,9 +130,9 @@ namespace ShellRun.Utilities
             return false;
         }
 
-        #region Public Properties
-
-        /// <summary>The Windows directory info.</summary>
+        /// <summary>
+        /// The Windows directory info.
+        /// </summary>
         public static DirectoryInfo System
         {
             get
@@ -128,7 +141,9 @@ namespace ShellRun.Utilities
             }
         }
 
-        /// <summary>The Windows directory info.</summary>
+        /// <summary>
+        /// The Windows directory info.
+        /// </summary>
         public static DirectoryInfo Windows
         {
             get
@@ -136,7 +151,5 @@ namespace ShellRun.Utilities
                 return System.Parent;
             }
         }
-
-        #endregion
     }
 }

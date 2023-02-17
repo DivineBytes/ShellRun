@@ -1,6 +1,6 @@
-﻿function Main()
-'Display message on computer screen.
-result = MsgBox("Hello, World!", vbOKOnly, "Title")
+function Main()
+'Displays a message.
+result = MsgBox("Hello, world!", vbOKOnly, "Title")
 end function
 
 call Main

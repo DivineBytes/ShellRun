@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using System;
 using ShellRun.Modules;
-using ShellRun.Attributes;
 using ShellRun.Containers;
 using System.IO;
 using System.Reflection;
@@ -10,15 +9,41 @@ namespace ShellRun.Test
 {
     public class Tests
     {
-        public string AssemblyPath = string.Empty;
-        public string AssemblyDirectory = string.Empty;
+        public static string AssemblyLocation
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly().Location;
+            }
+        }
+
+        public static string AssemblyDirectory
+        {
+            get
+            {
+                return Path.GetDirectoryName(AssemblyLocation);
+            }
+        }
+
+        public static string ScriptsDirectory
+        {
+            get
+            {
+                return new DirectoryInfo(AssemblyDirectory).Parent.Parent.Parent.FullName;
+            }
+        }
 
         [SetUp]
         public void Setup()
         {
-            // Configure the necessary test data.
-            AssemblyPath = Assembly.GetExecutingAssembly().Location;
-            AssemblyDirectory = Path.GetDirectoryName(AssemblyPath);
+            // Initialize the tests
+        }
+
+        [Test]
+        public void RunDll32Test()
+        {
+            var x = RunDLLs.AddRemovePrograms.Start();
+            Assert.IsTrue(x);
         }
 
         [Test]
@@ -45,7 +70,7 @@ namespace ShellRun.Test
         [Test]
         public void RunDialogTest()
         {
-            var x = RunDialog.SetDefault("Hello World", 'z');
+            var x = RunDialog.SetDefault("Hello, world!", 'z');
             Console.WriteLine(x);
         }
 
@@ -64,27 +89,31 @@ namespace ShellRun.Test
         [Test]
         public void RunBatchTest()
         {
-            const string Content = "@ECHO OFF\nTITLE Batch Test\nECHO Hello World.\nECHO.\nPAUSE";
-            const string FileName = "BatchTest.bat";
+            const string ScriptName = "Batch.bat";
+            string scriptPath = Path.Combine(ScriptsDirectory, "Scripts", ScriptName);
 
-            string FilePath = Path.Combine(AssemblyDirectory, FileName);
+            if (string.IsNullOrEmpty(scriptPath) && !File.Exists(scriptPath))
+            {
+                throw new ArgumentNullException(nameof(scriptPath), "Cannot be null or empty.");
+            }
 
-            File.WriteAllText(FilePath, Content);
-            var x = Scripts.RunBatch(FilePath);
+            var x = Batch.Start(scriptPath);
 
             Assert.IsTrue(x);
         }
 
         [Test]
-        public void RunPowershellTest()
+        public void RunPowerShellTest()
         {
-            const string Content = "Write-Host 'Hello, World!'\n$host.UI.RawUI.ReadKey(\"NoEcho,IncludeKeyDown\")";
-            const string FileName = "PowerShellTest.ps1";
+            const string ScriptName = "PowerShell.ps1";
+            string scriptPath = Path.Combine(ScriptsDirectory, "Scripts", ScriptName);
 
-            string FilePath = Path.Combine(AssemblyDirectory, FileName);
+            if (string.IsNullOrEmpty(scriptPath) && !File.Exists(scriptPath))
+            {
+                throw new ArgumentNullException(nameof(scriptPath), "Cannot be null or empty.");
+            }
 
-            File.WriteAllText(FilePath, Content);
-            var x = Scripts.RunPowershell(FilePath);
+            var x = PowerShell.Start(scriptPath);
 
             Assert.IsTrue(x);
         }
@@ -92,14 +121,17 @@ namespace ShellRun.Test
         [Test]
         public void RunVBScriptTest()
         {
-            const string Content = "function Main()\n'Display message on computer screen.\nresult = MsgBox(\"Hello, World!\", vbOKOnly, \"Title\")\nend function\n\ncall Main";
-            const string FileName = "VBScriptTest.vbs";
-            const string Arguments = "//B //Nologo";
+            const string ScriptName = "VBScript.vbs";
+            string scriptPath = Path.Combine(ScriptsDirectory, "Scripts", ScriptName);
 
-            string FilePath = Path.Combine(AssemblyDirectory, FileName);
-            Console.WriteLine(FilePath);
-            File.WriteAllText(FilePath, Content);
-            var x = Scripts.RunVBScript(FilePath, "", Scripts.VBScript.CScript);
+            if (string.IsNullOrEmpty(scriptPath) && !File.Exists(scriptPath))
+            {
+                throw new ArgumentNullException(nameof(scriptPath), "Cannot be null or empty.");
+            }
+
+            // const string Arguments = "//B //Nologo";
+
+            var x = VBScript.Start(scriptPath, string.Empty, VBScript.VBScriptType.CScript);
 
             Assert.IsTrue(x);
         }

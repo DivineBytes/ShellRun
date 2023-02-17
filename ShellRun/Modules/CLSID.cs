@@ -1,4 +1,5 @@
-﻿using ShellRun.Utilities;
+﻿using ShellRun.Base;
+using ShellRun.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,15 +7,23 @@ using System.Diagnostics;
 namespace ShellRun.Modules
 {
     /// <summary>
-    /// The <see cref="CLSID"/> class.
+    /// The <see cref="CLSID" /> class.
     /// </summary>
-    public class CLSID : CommandContainer
+    /// <seealso cref="ShellRun.Base.CommandBase" />
+    public class CLSID : CommandBase
     {
+        /// <summary>
+        /// The empty <see cref="CLSID" />.
+        /// </summary>
         public static CLSID Empty = new CLSID();
+
+        /// <summary>
+        /// The shell command prefix.
+        /// </summary>
         public const string ShellCommand = "shell:::";
 
         /// <summary>
-        /// The <see cref="CLSID"/>.
+        /// The <see cref="CLSID" />.
         /// </summary>
         private CLSID()
         {
@@ -23,10 +32,15 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// The <see cref="CLSID"/>.
+        /// The <see cref="CLSID" />.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="guid">The guid.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// name - Cannot be null.
+        /// or
+        /// guid - Cannot be null.
+        /// </exception>
         public CLSID(string name, List<string> guid) : this()
         {
             if (name == null)
@@ -46,16 +60,25 @@ namespace ShellRun.Modules
         /// <summary>
         /// The name.
         /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
         public string Name { get; private set; }
 
         /// <summary>
         /// The GUIDS.
         /// </summary>
+        /// <value>
+        /// The guids.
+        /// </value>
         public List<string> GUIDS { get; private set; }
 
         /// <summary>
         /// The count.
         /// </summary>
+        /// <value>
+        /// The count.
+        /// </value>
         public int Count
         {
             get
@@ -67,6 +90,9 @@ namespace ShellRun.Modules
         /// <summary>
         /// The command.
         /// </summary>
+        /// <value>
+        /// The command.
+        /// </value>
         public string Command
         {
             get
@@ -78,6 +104,9 @@ namespace ShellRun.Modules
         /// <summary>
         /// The GUID.
         /// </summary>
+        /// <value>
+        /// The unique identifier.
+        /// </value>
         public string GUID
         {
             get
@@ -86,10 +115,9 @@ namespace ShellRun.Modules
             }
         }
 
-        /// <summary>
-        /// The open.
-        /// </summary>
-        public override bool Open()
+#pragma warning disable 1591
+
+        public override bool Start()
         {
             if (!string.IsNullOrEmpty(GUID))
             {
@@ -103,7 +131,7 @@ namespace ShellRun.Modules
         /// The create command.
         /// </summary>
         /// <param name="guid">The guid.</param>
-
+        /// <returns>The <see cref="string"/> result.</returns>
         public static string CreateCommand(string guid)
         {
             if (!string.IsNullOrEmpty(guid))
@@ -118,6 +146,7 @@ namespace ShellRun.Modules
         /// The create command.
         /// </summary>
         /// <param name="clsid">The clsid.</param>
+        /// <returns>The <see cref="string"/> result.</returns>
         public static string CreateCommand(CLSID clsid)
         {
             if (clsid != null)
@@ -129,9 +158,10 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// The open.
+        /// Open the GUID.
         /// </summary>
         /// <param name="guid">The guid.</param>
+        /// <returns>The <see cref="bool"/> result.</returns>
         public static bool Open(string guid)
         {
             if (!string.IsNullOrEmpty(guid))
@@ -151,9 +181,10 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// The open.
+        /// Open the <see cref="CLSID"/>.
         /// </summary>
         /// <param name="clsid">The clsid.</param>
+        /// <returns>The <see cref="bool"/> result.</returns>
         public static bool Open(CLSID clsid)
         {
             if (clsid != null)

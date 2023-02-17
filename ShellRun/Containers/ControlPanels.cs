@@ -6,6 +6,8 @@ namespace ShellRun.Containers
     /// <summary>
     /// The <see cref="ControlPanels"/> class.
     /// </summary>
+#pragma warning disable 1591
+
     public static class ControlPanels
     {
         public static ControlPanelApplet AddADeviceWizard = new ControlPanelApplet("Add a Device wizard", new List<string> { "%windir%\\System32\\DevicePairingWizard.exe" });

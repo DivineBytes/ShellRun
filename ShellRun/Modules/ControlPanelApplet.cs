@@ -1,4 +1,5 @@
-﻿using ShellRun.Utilities;
+﻿using ShellRun.Base;
+using ShellRun.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,17 +7,18 @@ using System.Diagnostics;
 namespace ShellRun.Modules
 {
     /// <summary>
-    /// The <see cref="ControlPanelApplet"/>.
+    /// The <see cref="ControlPanelApplet" />.
     /// </summary>
-    public class ControlPanelApplet : CommandContainer
+    /// <seealso cref="ShellRun.Base.CommandBase" />
+    public class ControlPanelApplet : CommandBase
     {
         /// <summary>
-        /// The empty <see cref="ControlPanelApplet"/>.
+        /// The empty <see cref="ControlPanelApplet" />.
         /// </summary>
         public static ControlPanelApplet Empty = new ControlPanelApplet();
 
         /// <summary>
-        /// The <see cref="ControlPanelApplet"/>.
+        /// The <see cref="ControlPanelApplet" />.
         /// </summary>
         private ControlPanelApplet()
         {
@@ -25,10 +27,15 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// The <see cref="ControlPanelApplet"/>.
+        /// The <see cref="ControlPanelApplet" />.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="commands">The commands.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// name - Cannot be null.
+        /// or
+        /// commands - Cannot be null.
+        /// </exception>
         public ControlPanelApplet(string name, List<string> commands) : this()
         {
             if (name == null)
@@ -48,16 +55,25 @@ namespace ShellRun.Modules
         /// <summary>
         /// The name.
         /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
         public string Name { get; private set; }
 
         /// <summary>
         /// The commands.
         /// </summary>
+        /// <value>
+        /// The commands.
+        /// </value>
         public List<string> Commands { get; private set; }
 
         /// <summary>
         /// The command.
         /// </summary>
+        /// <value>
+        /// The command.
+        /// </value>
         public string Command
         {
             get
@@ -66,10 +82,9 @@ namespace ShellRun.Modules
             }
         }
 
-        /// <summary>
-        /// The open.
-        /// </summary>
-        public override bool Open()
+#pragma warning disable 1591
+
+        public override bool Start()
         {
             try
             {
@@ -79,7 +94,6 @@ namespace ShellRun.Modules
                 };
 
                 return ProcessUtilities.StartProcess(processStartInfo);
-
             }
             catch (Exception ex)
             {

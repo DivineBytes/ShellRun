@@ -14,7 +14,7 @@ namespace ShellRun.Utilities
         /// The start process.
         /// </summary>
         /// <param name="processStartInfo">The process start info.</param>
-        /// <returns>The <see cref="bool" />.</returns>
+        /// <returns>The <see cref="bool"/>.</returns>
         public static bool StartProcess(ProcessStartInfo processStartInfo)
         {
             if (processStartInfo == null)
@@ -47,7 +47,7 @@ namespace ShellRun.Utilities
         /// <param name="runAsAdmin">The run as admin.</param>
         /// <param name="createNoWindow">The create no window.</param>
         /// <param name="shellExecute">The shell execute.</param>
-        /// <returns>The <see cref="bool" />.</returns>
+        /// <returns>The <see cref="bool"/>.</returns>
         public static bool StartProcess(string fileName, string arguments = "", bool runAsAdmin = false, bool createNoWindow = false, bool shellExecute = false)
         {
             if (fileName == null)
@@ -70,7 +70,7 @@ namespace ShellRun.Utilities
         /// <param name="runAsAdmin">The run as admin.</param>
         /// <param name="createNoWindow">The create no window.</param>
         /// <param name="shellExecute">The shell execute.</param>
-        /// <returns>The <see cref="bool" />.</returns>
+        /// <returns>The <see cref="bool"/>.</returns>
         public static bool StartProcess(string fileName, string arguments = "", string workingDirectory = "", bool runAsAdmin = false, bool createNoWindow = false, bool shellExecute = false)
         {
             if (fileName == null)

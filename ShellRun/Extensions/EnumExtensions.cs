@@ -10,11 +10,11 @@ namespace ShellRun.Extensions
     public static class EnumExtensions
     {
         /// <summary>
-        ///     Gets the enum description.
+        /// Gets the enum description.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>The <see cref="string" />.</returns>
-        public static string GetEnumDescription(Enum value)
+        /// <returns>The <see cref="string"/>.</returns>
+        public static string GetDescription(Enum value)
         {
             if (value != null)
             {
@@ -32,18 +32,17 @@ namespace ShellRun.Extensions
 
                     return value.ToString();
                 }
-
             }
 
             return string.Empty;
         }
 
         /// <summary>
-        ///     Gets the enum display name.
+        /// Gets the enum display name.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>The <see cref="string" />.</returns>
-        public static string GetEnumDisplayName(Enum value)
+        /// <returns>The <see cref="string"/>.</returns>
+        public static string GetDisplayName(Enum value)
         {
             if (value != null)
             {
@@ -61,7 +60,6 @@ namespace ShellRun.Extensions
 
                     return value.ToString();
                 }
-
             }
 
             return string.Empty;

@@ -8,11 +8,14 @@ using System.Runtime.InteropServices;
 namespace ShellRun.Modules
 {
     /// <summary>
-    /// The <see cref="RunDialog"/>.
+    /// The <see cref="RunDialog" />.
     /// </summary>
     public class RunDialog
     {
-        const string MRUList = "MRUList";
+        /// <summary>
+        /// The MRU List.
+        /// </summary>
+        private const string MRUList = "MRUList";
 
         /// <summary>
         /// The <see cref="RunFileDialogFlags"/>.
@@ -57,14 +60,24 @@ namespace ShellRun.Modules
             NoSeperateMemory = 0x0020
         }
 
+        /// <summary>
+        /// Opens the typical 'Run' dialog used by the start menu, without explorer.exe.
+        /// </summary>
+        /// <param name="hwndOwner">The owner.</param>
+        /// <param name="hIcon">The icon.</param>
+        /// <param name="lpszPath">The path.</param>
+        /// <param name="lpszDialogTitle">The dialog title.</param>
+        /// <param name="lpszDialogTextBody">The dialog text body.</param>
+        /// <param name="uflags">The flags.</param>
+        /// <returns>The <see cref="bool"/> result.</returns>
         [DllImport("shell32.dll", CharSet = CharSet.Auto, EntryPoint = "#61", SetLastError = true)]
         public static extern bool SHRunFileDialog(IntPtr hwndOwner, IntPtr hIcon, string lpszPath, string lpszDialogTitle, string lpszDialogTextBody, RunFileDialogFlags uflags);
 
         /// <summary>
         /// Shows the custom Run Dialog.
         /// </summary>
-        /// <param name="text">The dialog body text.</param>
         /// <param name="title">The dialog title.</param>
+        /// <param name="text">The dialog body text.</param>
         /// <param name="workingDirectory">The working directory.</param>
         /// <param name="runFileDialogFlags">The run file dialog flags.</param>
         public static void Show(string title = "Run", string text = "Type the name of a program, folder, document, or Internet resource, and Windows will open it for you.", string workingDirectory = "", RunFileDialogFlags runFileDialogFlags = RunFileDialogFlags.CalcDirectory)
@@ -78,13 +91,14 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// Opens the Run Dialog.
+        /// Start the Run Dialog.
         /// </summary>
-        public static bool Open()
+        /// <returns>The <see cref="bool"/> result.</returns>
+        public static bool Start()
         {
             try
             {
-               return CLSIDS.Run.Open();
+                return CLSIDS.Run.Start();
             }
             catch (Exception ex)
             {
@@ -97,6 +111,9 @@ namespace ShellRun.Modules
         /// <summary>
         /// The base key.
         /// </summary>
+        /// <value>
+        /// The base key.
+        /// </value>
         public static RegistryKey BaseKey
         {
             get
@@ -120,8 +137,9 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// The clear history.
+        /// Clears the history.
         /// </summary>
+        /// <returns>The <see cref="bool"/> result.</returns>
         public static bool ClearHistory()
         {
             try
@@ -149,10 +167,14 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// The set default.
+        /// Set the default command.
         /// </summary>
         /// <param name="command">The command.</param>
-        /// <param name="keyName">The key name.</param>
+        /// <param name="keyName">The registry key name.</param>
+        /// <returns>
+        /// The <see cref="bool" /> result.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">command - Cannot be null</exception>
         public static bool SetDefault(string command, char keyName = 'z')
         {
             if (string.IsNullOrEmpty(command))
@@ -177,9 +199,9 @@ namespace ShellRun.Modules
                     {
                         mruListObj = baseKey.GetValue(MRUList);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        // Console.WriteLine(ex);
+                        // Console.WriteLine(e);
                     }
                     finally
                     {
@@ -188,7 +210,7 @@ namespace ShellRun.Modules
                             mruList = string.Empty;
                         }
                     }
-                    
+
                     string newMRUList = string.Empty;
                     if (mruList.Length > 0)
                     {
@@ -222,8 +244,11 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// The get history.
+        /// Get the Run Dialog history.
         /// </summary>
+        /// <returns>
+        /// The <see cref="List{T}" /> result.
+        /// </returns>
         public static List<KeyValuePair<char, string>> GetHistory()
         {
             List<KeyValuePair<char, string>> runHistory = new List<KeyValuePair<char, string>>();
