@@ -1,6 +1,6 @@
 <h1 align="center">ShellRun</h1>
 
-<p align="center">Automates the running of code, shell commands and scripts.</p>
+<p align="center">Run code, commands and scripts with ease.</p>
 
 <p align="center">
 <img src="ShellRun\Resources\Logo.png" alt="Logo" width="64" />
