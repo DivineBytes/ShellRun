@@ -29,7 +29,7 @@ namespace ShellRun.Test
         {
             get
             {
-                return Path.Combine(new DirectoryInfo(AssemblyDirectory).Parent.Parent.Parent.FullName, "Scripts");
+                return Path.Combine(new DirectoryInfo(AssemblyDirectory).Parent.Parent.Parent.FullName, "Code");
             }
         }
 
