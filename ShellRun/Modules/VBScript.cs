@@ -81,7 +81,7 @@ namespace ShellRun.Modules
         {
             if (string.IsNullOrEmpty(vbsFile))
             {
-                throw new ArgumentNullException(nameof(vbsFile), Settings.Default.Arg_CannotBeNullOrEmpty);
+                throw new ArgumentNullException(nameof(vbsFile), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             string command;

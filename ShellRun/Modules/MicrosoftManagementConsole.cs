@@ -104,19 +104,19 @@ namespace ShellRun.Modules
         /// </exception>
         public MicrosoftManagementConsole(string name, string command, List<string> categorys) : this()
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(name), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
-            if (command == null)
+            if (string.IsNullOrEmpty(command))
             {
-                throw new ArgumentNullException(nameof(command), Constants.ExceptionMessages.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(command), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             if (categorys == null)
             {
-                throw new ArgumentNullException(nameof(categorys), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(categorys), Constants.ExceptionMessages.CannotBeNull);
             }
 
             Name = name;

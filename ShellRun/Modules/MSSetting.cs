@@ -37,14 +37,14 @@ namespace ShellRun.Modules
         /// </exception>
         public MSSetting(string name, string command) : this()
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(name), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
-            if (command == null)
+            if (string.IsNullOrEmpty(command))
             {
-                throw new ArgumentNullException(nameof(command), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(command), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             Name = name;

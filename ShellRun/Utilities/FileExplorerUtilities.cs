@@ -27,7 +27,7 @@ namespace ShellRun.Utilities
         {
             if (directory == null)
             {
-                throw new ArgumentNullException(nameof(directory), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(directory), Constants.ExceptionMessages.CannotBeNull);
             }
 
             return Show(directory.FullName, selectFile, fileName);
@@ -44,7 +44,7 @@ namespace ShellRun.Utilities
         {
             if (fileInfo == null)
             {
-                throw new ArgumentNullException(nameof(fileInfo), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(fileInfo), Constants.ExceptionMessages.CannotBeNull);
             }
 
             return Show(fileInfo.Directory, selectFile, fileInfo.Name);

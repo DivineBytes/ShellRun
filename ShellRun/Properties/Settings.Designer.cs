@@ -31,32 +31,5 @@ namespace ShellRun.Properties {
                 return ((string)(this["Website"]));
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Cannot be null.")]
-        public string Arg_CannotBeNull {
-            get {
-                return ((string)(this["Arg_CannotBeNull"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Cannot be null or empty.")]
-        public string Arg_CannotBeNullOrEmpty {
-            get {
-                return ((string)(this["Arg_CannotBeNullOrEmpty"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("The file cannot be found.")]
-        public string Arg_FileNotFound {
-            get {
-                return ((string)(this["Arg_FileNotFound"]));
-            }
-        }
     }
 }

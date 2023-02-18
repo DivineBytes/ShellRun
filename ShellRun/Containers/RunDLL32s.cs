@@ -131,12 +131,12 @@ namespace ShellRun.Containers
         {
             if (string.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentNullException(nameof(fileName), Settings.Default.Arg_CannotBeNullOrEmpty);
+                throw new ArgumentNullException(nameof(fileName), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             if (!File.Exists(fileName))
             {
-                throw new FileNotFoundException(Settings.Default.Arg_FileNotFound, fileName);
+                throw new FileNotFoundException(Constants.ExceptionMessages.FileNotFound, fileName);
             }
 
             try

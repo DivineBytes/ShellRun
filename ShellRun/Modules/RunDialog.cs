@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using ShellRun.Containers;
-using ShellRun.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +8,7 @@ using System.Runtime.InteropServices;
 namespace ShellRun.Modules
 {
     /// <summary>
-    /// The <see cref="RunDialog" />.
+    /// The <see cref="RunDialog"/>.
     /// </summary>
     public class RunDialog
     {
@@ -22,6 +21,11 @@ namespace ShellRun.Modules
         /// The default text.
         /// </summary>
         public const string DefaultText = "Type the name of a program, folder, document, or Internet resource, and Windows will open it for you.";
+
+        /// <summary>
+        /// The default title.
+        /// </summary>
+        public const string DefaultTitle = "Run";
 
         /// <summary>
         /// The <see cref="RunFileDialogFlags"/>.
@@ -86,7 +90,7 @@ namespace ShellRun.Modules
         /// <param name="text">The dialog body text.</param>
         /// <param name="workingDirectory">The working directory.</param>
         /// <param name="runFileDialogFlags">The run file dialog flags.</param>
-        public static void Show(string title = "Run", string text = DefaultText, string workingDirectory = "", RunFileDialogFlags runFileDialogFlags = RunFileDialogFlags.CalcDirectory)
+        public static void Show(string title = DefaultTitle, string text = DefaultText, string workingDirectory = "", RunFileDialogFlags runFileDialogFlags = RunFileDialogFlags.CalcDirectory)
         {
             if (string.IsNullOrEmpty(workingDirectory))
             {
@@ -117,9 +121,7 @@ namespace ShellRun.Modules
         /// <summary>
         /// The base key.
         /// </summary>
-        /// <value>
-        /// The base key.
-        /// </value>
+        /// <value>The base key.</value>
         public static RegistryKey BaseKey
         {
             get
@@ -177,15 +179,13 @@ namespace ShellRun.Modules
         /// </summary>
         /// <param name="command">The command.</param>
         /// <param name="keyName">The registry key name.</param>
-        /// <returns>
-        /// The <see cref="bool" /> result.
-        /// </returns>
+        /// <returns>The <see cref="bool"/> result.</returns>
         /// <exception cref="System.ArgumentNullException">command - Cannot be null</exception>
         public static bool SetDefault(string command, char keyName = 'z')
         {
             if (string.IsNullOrEmpty(command))
             {
-                throw new ArgumentNullException(nameof(command), Constants.ExceptionMessages.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(command), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             try
@@ -198,7 +198,7 @@ namespace ShellRun.Modules
                     baseKey.SetValue(keyName.ToString(), command, RegistryValueKind.String);
 
                     // Get the MRUList
-                    string mruList = "";
+                    string mruList = string.Empty;
                     object mruListObj = null;
 
                     try
@@ -223,8 +223,8 @@ namespace ShellRun.Modules
                         var mruListChar = mruList.ToCharArray();
 
                         // Validate the first character is not equal to the key name
-                        var xx = mruListChar[0];
-                        if (xx != keyName)
+                        char initialChar = mruListChar[0];
+                        if (initialChar != keyName)
                         {
                             // Add the char to the prefix of the mruList
                             newMRUList = keyName.ToString() + mruList;
@@ -252,9 +252,7 @@ namespace ShellRun.Modules
         /// <summary>
         /// Get the Run Dialog history.
         /// </summary>
-        /// <returns>
-        /// The <see cref="List{T}" /> result.
-        /// </returns>
+        /// <returns>The <see cref="List{T}"/> result.</returns>
         public static List<KeyValuePair<char, string>> GetHistory()
         {
             List<KeyValuePair<char, string>> runHistory = new List<KeyValuePair<char, string>>();

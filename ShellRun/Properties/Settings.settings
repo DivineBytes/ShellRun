@@ -5,14 +5,5 @@
     <Setting Name="Website" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://github.com/DivineBytes/ShellRun</Value>
     </Setting>
-    <Setting Name="Arg_CannotBeNull" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Cannot be null.</Value>
-    </Setting>
-    <Setting Name="Arg_CannotBeNullOrEmpty" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Cannot be null or empty.</Value>
-    </Setting>
-    <Setting Name="Arg_FileNotFound" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">The file cannot be found.</Value>
-    </Setting>
   </Settings>
 </SettingsFile>

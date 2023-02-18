@@ -1,5 +1,5 @@
 @ECHO OFF
 TITLE Batch Test
-ECHO Hello, World!
+ECHO Hello, world!
 ECHO.
-PAUSE
+PAUSE > NUL | SET /P = "Press any Key to exit..."

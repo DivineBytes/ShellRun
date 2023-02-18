@@ -45,22 +45,22 @@ namespace ShellRun.Modules
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name), Settings.Default.Arg_CannotBeNullOrEmpty);
+                throw new ArgumentNullException(nameof(name), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             if (guid == null)
             {
-                throw new ArgumentNullException(nameof(guid), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(guid), Constants.ExceptionMessages.CannotBeNull);
             }
 
             if (description == null)
             {
-                throw new ArgumentNullException(nameof(description), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(description), Constants.ExceptionMessages.CannotBeNull);
             }
 
             if (path == null)
             {
-                throw new ArgumentNullException(nameof(path), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(path), Constants.ExceptionMessages.CannotBeNull);
             }
 
             Name = name;
@@ -125,7 +125,7 @@ namespace ShellRun.Modules
         {
             if (shell == null)
             {
-                throw new ArgumentNullException(nameof(shell), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(shell), Constants.ExceptionMessages.CannotBeNull);
             }
 
             return string.Format("\"{0}{1}\"", ShellCommand, shell.Name);

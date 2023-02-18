@@ -29,7 +29,7 @@ namespace ShellRun.Test
         {
             get
             {
-                return new DirectoryInfo(AssemblyDirectory).Parent.Parent.Parent.FullName;
+                return Path.Combine(new DirectoryInfo(AssemblyDirectory).Parent.Parent.Parent.FullName, "Scripts");
             }
         }
 
@@ -90,11 +90,16 @@ namespace ShellRun.Test
         public void RunBatchTest()
         {
             const string ScriptName = "Batch.bat";
-            string scriptPath = Path.Combine(ScriptsDirectory, "Scripts", ScriptName);
+            string scriptPath = Path.Combine(ScriptsDirectory, ScriptName);
 
-            if (string.IsNullOrEmpty(scriptPath) && !File.Exists(scriptPath))
+            if (string.IsNullOrEmpty(scriptPath))
             {
-                throw new ArgumentNullException(nameof(scriptPath), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(scriptPath), Constants.ExceptionMessages.CannotBeNullOrEmpty);
+            }
+
+            if (!File.Exists(scriptPath))
+            {
+                throw new FileNotFoundException(Constants.ExceptionMessages.FileNotFound, scriptPath);
             }
 
             var x = Batch.Start(scriptPath);
@@ -106,11 +111,16 @@ namespace ShellRun.Test
         public void RunPowerShellTest()
         {
             const string ScriptName = "PowerShell.ps1";
-            string scriptPath = Path.Combine(ScriptsDirectory, "Scripts", ScriptName);
+            string scriptPath = Path.Combine(ScriptsDirectory, ScriptName);
 
-            if (string.IsNullOrEmpty(scriptPath) && !File.Exists(scriptPath))
+            if (string.IsNullOrEmpty(scriptPath))
             {
-                throw new ArgumentNullException(nameof(scriptPath), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(scriptPath), Constants.ExceptionMessages.CannotBeNullOrEmpty);
+            }
+
+            if (!File.Exists(scriptPath))
+            {
+                throw new FileNotFoundException(Constants.ExceptionMessages.FileNotFound, scriptPath);
             }
 
             var x = PowerShell.Start(scriptPath);
@@ -122,11 +132,16 @@ namespace ShellRun.Test
         public void RunVBScriptTest()
         {
             const string ScriptName = "VBScript.vbs";
-            string scriptPath = Path.Combine(ScriptsDirectory, "Scripts", ScriptName);
+            string scriptPath = Path.Combine(ScriptsDirectory, ScriptName);
 
-            if (string.IsNullOrEmpty(scriptPath) && !File.Exists(scriptPath))
+            if (string.IsNullOrEmpty(scriptPath))
             {
-                throw new ArgumentNullException(nameof(scriptPath), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(scriptPath), Constants.ExceptionMessages.CannotBeNullOrEmpty);
+            }
+
+            if (!File.Exists(scriptPath))
+            {
+                throw new FileNotFoundException(Constants.ExceptionMessages.FileNotFound, scriptPath);
             }
 
             // const string Arguments = "//B //Nologo";

@@ -39,14 +39,14 @@ namespace ShellRun.Modules
         /// </exception>
         public ControlPanelApplet(string name, List<string> commands) : this()
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(name), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             if (commands == null && commands.Count > 0)
             {
-                throw new ArgumentNullException(nameof(commands), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(commands), Constants.ExceptionMessages.CannotBeNull);
             }
 
             Name = name;

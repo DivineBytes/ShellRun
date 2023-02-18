@@ -46,12 +46,12 @@ namespace ShellRun.Modules
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(name), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             if (guid == null)
             {
-                throw new ArgumentNullException(nameof(guid), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(guid), Constants.ExceptionMessages.CannotBeNull);
             }
 
             Name = name;

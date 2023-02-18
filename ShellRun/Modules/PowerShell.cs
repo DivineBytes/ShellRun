@@ -90,12 +90,12 @@ namespace ShellRun.Modules
         {
             if (string.IsNullOrEmpty(powershellFile))
             {
-                throw new ArgumentNullException(nameof(powershellFile), Settings.Default.Arg_CannotBeNullOrEmpty);
+                throw new ArgumentNullException(nameof(powershellFile), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             if (string.IsNullOrEmpty(prefix))
             {
-                throw new ArgumentNullException(nameof(prefix), Settings.Default.Arg_CannotBeNullOrEmpty);
+                throw new ArgumentNullException(nameof(prefix), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             string command;
@@ -108,9 +108,7 @@ namespace ShellRun.Modules
                 command = $"{prefix} \"{powershellFile}\" \"{arguments}\"";
             }
 
-            string workingDirectory = Path.Combine();
-
-            return ProcessUtilities.StartProcess(Executable, command, workingDirectory, runAsAdmin, createNoWindow, true);
+            return ProcessUtilities.StartProcess(Executable, command, runAsAdmin, createNoWindow, true);
         }
     }
 }

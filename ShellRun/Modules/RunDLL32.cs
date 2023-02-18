@@ -47,22 +47,22 @@ namespace ShellRun.Modules
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name), Settings.Default.Arg_CannotBeNullOrEmpty);
+                throw new ArgumentNullException(nameof(name), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             if (string.IsNullOrEmpty(dllName))
             {
-                throw new ArgumentNullException(nameof(dllName), Settings.Default.Arg_CannotBeNullOrEmpty);
+                throw new ArgumentNullException(nameof(dllName), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             if (string.IsNullOrEmpty(entryPoint))
             {
-                throw new ArgumentNullException(nameof(entryPoint), Settings.Default.Arg_CannotBeNullOrEmpty);
+                throw new ArgumentNullException(nameof(entryPoint), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             if (arguments == null)
             {
-                throw new ArgumentNullException(nameof(arguments), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(arguments), Constants.ExceptionMessages.CannotBeNull);
             }
 
             Name = name;
@@ -158,12 +158,12 @@ namespace ShellRun.Modules
 
             if (string.IsNullOrEmpty(dllName))
             {
-                throw new ArgumentNullException(nameof(dllName), Settings.Default.Arg_CannotBeNullOrEmpty);
+                throw new ArgumentNullException(nameof(dllName), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             if (string.IsNullOrEmpty(entryPoint))
             {
-                throw new ArgumentNullException(nameof(entryPoint), Settings.Default.Arg_CannotBeNullOrEmpty);
+                throw new ArgumentNullException(nameof(entryPoint), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             string argument;

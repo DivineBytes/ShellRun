@@ -20,7 +20,7 @@ namespace ShellRun.Utilities
         {
             if (processStartInfo == null)
             {
-                throw new ArgumentNullException(nameof(processStartInfo), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(processStartInfo), Constants.ExceptionMessages.CannotBeNull);
             }
 
             try
@@ -53,7 +53,7 @@ namespace ShellRun.Utilities
         {
             if (string.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentNullException(nameof(fileName), Settings.Default.Arg_CannotBeNullOrEmpty);
+                throw new ArgumentNullException(nameof(fileName), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             FileInfo fileInfo = new FileInfo(fileName);
@@ -76,12 +76,12 @@ namespace ShellRun.Utilities
         {
             if (string.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentNullException(nameof(fileName), Settings.Default.Arg_CannotBeNullOrEmpty);
+                throw new ArgumentNullException(nameof(fileName), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             if (string.IsNullOrEmpty(workingDirectory))
             {
-                throw new ArgumentNullException(nameof(workingDirectory), Settings.Default.Arg_CannotBeNullOrEmpty);
+                throw new ArgumentNullException(nameof(workingDirectory), Constants.ExceptionMessages.CannotBeNullOrEmpty);
             }
 
             ProcessStartInfo processStartInfo = new ProcessStartInfo(fileName)
