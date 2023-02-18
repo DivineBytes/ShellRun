@@ -185,7 +185,7 @@ namespace ShellRun.Modules
         {
             if (string.IsNullOrEmpty(command))
             {
-                throw new ArgumentNullException(nameof(command), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(command), Constants.ExceptionMessages.Arg_CannotBeNull);
             }
 
             try

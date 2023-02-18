@@ -44,7 +44,7 @@ namespace ShellRun.Modules
         /// </exception>
         public CLSID(string name, List<string> guid) : this()
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name), Settings.Default.Arg_CannotBeNull);
             }

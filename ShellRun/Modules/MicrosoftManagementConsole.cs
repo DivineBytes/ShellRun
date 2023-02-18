@@ -111,7 +111,7 @@ namespace ShellRun.Modules
 
             if (command == null)
             {
-                throw new ArgumentNullException(nameof(command), Settings.Default.Arg_CannotBeNull);
+                throw new ArgumentNullException(nameof(command), Constants.ExceptionMessages.Arg_CannotBeNull);
             }
 
             if (categorys == null)
