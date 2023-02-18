@@ -11,22 +11,23 @@ using System.Text;
 namespace ShellRun.Modules
 {
     /// <summary>
-    /// The <see cref="NETFramework" /> class.
+    /// The <see cref="NETFramework"/> class.
     /// </summary>
     public class NETFramework
     {
         /// <summary>
         /// Gets the default referenced assemblies.
         /// </summary>
-        /// <returns>The <see cref="List{T}"/> result.</returns>
-        public static List<string> DefaultReferencedAssemblies
+        /// <returns>The <see cref="string"/> result.</returns>
+        public static string[] DefaultReferencedAssemblies
         {
             get
             {
-                List<string> defaultReferencedAssemblies = new List<string>
+                string[] defaultReferencedAssemblies = new string[]
                 {
                     "mscorlib.dll",
                     "System.dll",
+                    "System.Core.dll",
                     "System.Data.dll",
                     "System.Drawing.dll",
                     "System.Windows.Forms.dll",
@@ -40,15 +41,15 @@ namespace ShellRun.Modules
         /// <summary>
         /// Starts the code files using a customizable <see cref="CompileConstructor"/>.
         /// </summary>
-        /// <param name="codeFiles">The code files.</param>
+        /// <param name="sourceCodeFiles">The source code files.</param>
         /// <param name="compileConstructor">The customizable compile constructor.</param>
         /// <returns>The <see cref="bool"/> result.</returns>
         /// <exception cref="ArgumentNullException">The argument cannot be null or empty.</exception>
-        public static bool Start(List<string> codeFiles, CompileConstructor compileConstructor)
+        public static bool Start(string[] sourceCodeFiles, CompileConstructor compileConstructor)
         {
-            if (codeFiles == null || codeFiles.Count == 0)
+            if (sourceCodeFiles == null || sourceCodeFiles.Length == 0)
             {
-                throw new ArgumentNullException(nameof(codeFiles), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(sourceCodeFiles), "Cannot be null or empty.");
             }
 
             if (compileConstructor == null)
@@ -56,14 +57,14 @@ namespace ShellRun.Modules
                 throw new ArgumentNullException(nameof(compileConstructor), "Cannot be null.");
             }
 
-            string[] sources = new string[codeFiles.Count];
+            string[] sources = new string[sourceCodeFiles.Length];
 
             try
             {
                 // Read all the code files to sources
-                for (int i = 0; i < codeFiles.Count; i++)
+                for (int i = 0; i < sourceCodeFiles.Length; i++)
                 {
-                    string codeFile = codeFiles[i];
+                    string codeFile = sourceCodeFiles[i];
                     sources[i] = File.ReadAllText(codeFile);
                 }
 
@@ -73,7 +74,7 @@ namespace ShellRun.Modules
                 // Check for compilation errors
                 if (compilerResults.Errors.HasErrors)
                 {
-                    Console.WriteLine($"Compile Errors {compilerResults.Errors.Count}:");
+                    Console.WriteLine($"Compile Errors [{compilerResults.Errors.Count}]:");
                     StringBuilder sb = new StringBuilder();
 
                     foreach (CompilerError error in compilerResults.Errors)
@@ -92,20 +93,43 @@ namespace ShellRun.Modules
                     // Get the assembly code entry point
                     Type program = assembly.GetType(compileConstructor.CodeEntryPoint.EntryPoint);
 
-                    // Create an instance of the program
-                    object instance = Activator.CreateInstance(program);
+                    object instance = null;
+                    try
+                    {
+                        // Create an instance of the program
+                        instance = Activator.CreateInstance(program);
 
-                    // Get the program entry method
-                    MethodInfo main = program.GetMethod(compileConstructor.CodeEntryPoint.MethodName);
+                        try
+                        {
 
-                    // Invoke the method
-                    main.Invoke(instance, compileConstructor.CodeEntryPoint.Parameters);
-                    return true;
+                            // Get the program entry method
+                            MethodInfo main = program.GetMethod(compileConstructor.CodeEntryPoint.MethodName);
+
+                            try
+                            {
+                                // Invoke the method
+                                main.Invoke(instance, compileConstructor.CodeEntryPoint.Parameters);
+                                return true;
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine($"Error: Failed to invoke the instance.");
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Error: The entry point (method name) for the instance is invalid.");
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Error: The entry point (namespace name and/or class name) for the instance is invalid.");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine($"{ex}\n");
             }
 
             return false;
@@ -117,12 +141,22 @@ namespace ShellRun.Modules
         public class CodeEntryPoint
         {
             /// <summary>
+            /// The default class name.
+            /// </summary>
+            public const string ClassNameDefault = "Program";
+
+            /// <summary>
+            /// The default method name.
+            /// </summary>
+            public const string MethodNameDefault = "Main";
+
+            /// <summary>
             /// Initializes the <see cref="CodeEntryPoint"/>.
             /// </summary>
             private CodeEntryPoint()
             {
-                ClassName = string.Empty;
-                MethodName = string.Empty;
+                ClassName = ClassNameDefault;
+                MethodName = MethodNameDefault;
                 Namespace = string.Empty;
                 Parameters = null;
             }
@@ -139,7 +173,7 @@ namespace ShellRun.Modules
             /// methodName - Cannot be null or empty.
             /// </exception>
             /// <exception cref="ArgumentNullException">The argument cannot be null or empty.</exception>
-            public CodeEntryPoint(string namespaceName, string className = "Program", string methodName = "Main", object[] parameters = null) : this()
+            public CodeEntryPoint(string namespaceName, string className = ClassNameDefault, string methodName = MethodNameDefault, object[] parameters = null) : this()
             {
                 if (string.IsNullOrEmpty(namespaceName))
                 {
@@ -212,13 +246,15 @@ namespace ShellRun.Modules
                 /// <summary>
                 /// The CSharp language.
                 /// </summary>
-                [Description("CSharp (C#) Language")]
+                [Attributes.DisplayName("csharp")]
+                [Description("CSharp (C#)")]
                 CSharp = 0,
 
                 /// <summary>
                 /// The Visual Basic language.
                 /// </summary>
-                [Description("Visual Basic (VB) Language")]
+                [Attributes.DisplayName("visualbasic")]
+                [Description("Visual Basic (VB)")]
                 VisualBasic = 1
             }
 
@@ -250,7 +286,7 @@ namespace ShellRun.Modules
                 CodeDomProvider = null;
                 CodeEntryPoint = null;
                 Provider = CodeProvider.CSharp;
-                ReferencedAssemblies = new List<string>();
+                ReferencedAssemblies = new string[0];
             }
 
             /// <summary>
@@ -261,7 +297,7 @@ namespace ShellRun.Modules
             /// <param name="targetFramework">The target framework.</param>
             /// <param name="referencedAssemblies">The referenced assemblies.</param>
             /// <exception cref="System.ArgumentNullException">codeEntryPoint - Cannot be null.</exception>
-            public CompileConstructor(CodeEntryPoint codeEntryPoint, CodeProvider provider = CodeProvider.CSharp, TargetFramework targetFramework = TargetFramework.v4, List<string> referencedAssemblies = null) : this()
+            public CompileConstructor(CodeEntryPoint codeEntryPoint, CodeProvider provider = CodeProvider.CSharp, TargetFramework targetFramework = TargetFramework.v4, string[] referencedAssemblies = null) : this()
             {
                 if (codeEntryPoint == null)
                 {
@@ -269,18 +305,9 @@ namespace ShellRun.Modules
                 }
 
                 CodeEntryPoint = codeEntryPoint;
-
                 Provider = provider;
 
-                // Validate the referenced assemblies
-                if (referencedAssemblies == null || referencedAssemblies.Count == 0)
-                {
-                    // Load the default referenced assemblies
-                    referencedAssemblies = DefaultReferencedAssemblies;
-                }
-
-                ReferencedAssemblies = referencedAssemblies;
-
+                // Get the target framework version
                 TargetFrameworkVersion = targetFramework;
                 string targetFrameworkVersion = string.Empty;
                 switch (targetFramework)
@@ -294,7 +321,8 @@ namespace ShellRun.Modules
                         break;
                 }
 
-                var providerOptions = new Dictionary<string, string>
+                // Assign the target framework version
+                Dictionary<string, string> providerOptions = new Dictionary<string, string>
                 {
                     {"CompilerVersion", targetFrameworkVersion}
                 };
@@ -311,10 +339,20 @@ namespace ShellRun.Modules
                         break;
                 }
 
+                // Validate the referenced assemblies
+                if (referencedAssemblies == null || referencedAssemblies.Length == 0)
+                {
+                    // Load the default referenced assemblies
+                    referencedAssemblies = DefaultReferencedAssemblies;
+                }
+
+                ReferencedAssemblies = referencedAssemblies;
+
+                // Define compile parameters
                 CompilerParameters = new CompilerParameters();
 
-                // Referenced assemblies
-                foreach (string referencedAssembly in referencedAssemblies)
+                // Add referenced assemblies
+                foreach (string referencedAssembly in ReferencedAssemblies)
                 {
                     if (!string.IsNullOrEmpty(referencedAssembly))
                     {
@@ -357,7 +395,7 @@ namespace ShellRun.Modules
             /// Gets the referenced assemblies.
             /// </summary>
             /// <value>The referenced assemblies.</value>
-            public List<string> ReferencedAssemblies { get; private set; }
+            public string[] ReferencedAssemblies { get; private set; }
 
             /// <summary>
             /// Gets the target framework version.

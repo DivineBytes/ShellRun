@@ -1,7 +1,6 @@
 ﻿using ShellRun.Modules;
 using ShellRun.Properties;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Text;
@@ -9,12 +8,16 @@ using System.Windows.Forms;
 
 namespace ShellRun
 {
+    /// <summary>
+    /// The <see cref="Program" /> class.
+    /// </summary>
     internal class Program
     {
         /// <summary>
         /// Defines the entry point of the application.
         /// </summary>
         /// <param name="args">The arguments.</param>
+        /// <exception cref="System.ArgumentException">Invalid code provider. - codeProvider</exception>
         public static void Main(string[] args)
         {
             // Initialize
@@ -24,57 +27,131 @@ namespace ShellRun
             // Validate the arguments
             if (args.Length > 0)
             {
-                string initialArgument = args[0];
+                string initialArgument = args[0].ToLower();
                 switch (initialArgument)
                 {
-                    //case "compile":
-                    //    // Arguments:
-                    //    // arg0: command
-                    //    // arg1: namespace
+                    case "code":
+                        Console.WriteLine("Usage:");
+                        Console.WriteLine("\"csharp\" \"Namespace;ClassName;MethodName\" \"System.dll;System.Windows.dll\" \"Folder\\Program.cs;Folder\\Utilities.cs\"");
+                        // Console.WriteLine("\"visualbasic\" \"AppName;Program;Main\" \"System.dll;System.Windows.dll\" \"Folder\\Program.vb;Folder\\Utilities.vb\"\n");
 
-                    //    // arg2: codeProvider -> {csharp,visualbasic}
-                    //    // arg3: referencedAssemblies -> {System.dll,System.Forms.dll}
+                        Console.WriteLine();
 
-                    //    // arg4: code file/s -> {program.cs,utilities.cs}
+                        // Arguments:
+                        // arg0: command
+                        // arg1: code language -> csharp || visualbasic
+                        // arg2: entry point code -> "namespaceName;className;methodName"
+                        // arg3: referenced assemblies -> ex: "System.dll;System.Windows.Forms.dll"
+                        // arg4: code file/s -> ex: "program.cs;utilities.cs"
 
-                    //    string namespaceName = args[1];
+                        Console.WriteLine("Starting compiler...");
 
-                    //    NETFramework.CodeEntryPoint codeEntryPoint = new NETFramework.CodeEntryPoint(namespaceName);
-                    //    Console.WriteLine("Code Entry Point:");
-                    //    Console.WriteLine("Entry Point: " + codeEntryPoint.EntryPoint);
-                    //    Console.WriteLine("Entry Method: " + codeEntryPoint.MethodName + "\n");
+                        // Determine the code provider
+                        string codeProviderText = args[1].ToLower();
+                        NETFramework.CompileConstructor.CodeProvider codeProvider;
+                        switch (codeProviderText)
+                        {
+                            case "csharp":
+                                codeProvider = NETFramework.CompileConstructor.CodeProvider.CSharp;
+                                break;
 
-                    //    string codeProvider = args[2];
+                            case "visualbasic":
+                                codeProvider = NETFramework.CompileConstructor.CodeProvider.VisualBasic;
+                                break;
 
-                    //    string referencedAssemblies = args[3];
+                            default:
+                                codeProvider = NETFramework.CompileConstructor.CodeProvider.CSharp;
+                                Console.WriteLine("Error: Unknown language code is being used! Using the default: " + Extensions.EnumExtensions.GetDescription(codeProvider));
+                                break;
+                        }
 
-                    //    NETFramework.CompileConstructor compileConstructor = new NETFramework.CompileConstructor(codeEntryPoint, NETFramework.CompileConstructor.CodeProvider.CSharp, NETFramework.CompileConstructor.TargetFramework.v4, null);
+                        Console.WriteLine("Language: " + Extensions.EnumExtensions.GetDescription(codeProvider));
 
-                    //    Console.WriteLine("Source Code File/s:");
+                        // Get the entry point methods
+                        string[] entryPoints = args[2].Split(Constants.Separator);
+                        string namespaceName = entryPoints[0];
 
-                    //    // Read the code files from the arguments
-                    //    List<string> codeFiles = new List<string>();
-                    //    for (int i = 4; i < args.Length; i++)
-                    //    {
-                    //        string arguments = args[i];
+                        string className = NETFramework.CodeEntryPoint.ClassNameDefault;
+                        if (entryPoints.Length >= 2)
+                        {
+                            if(string.IsNullOrEmpty(entryPoints[1]))
+                            {
+                                className = NETFramework.CodeEntryPoint.ClassNameDefault;
+                            }
+                            else
+                            {
+                                className = entryPoints[1];
+                            }
+                        }
 
-                    //        if (arguments != args[0] && arguments != args[1])
-                    //        {
-                    //            if (!string.IsNullOrEmpty(arguments))
-                    //            {
-                    //                Console.WriteLine(arguments);
-                    //                codeFiles.Add(arguments);
-                    //            }
-                    //        }
-                    //    }
+                        string methodName = NETFramework.CodeEntryPoint.MethodNameDefault;
+                        if (entryPoints.Length == 3)
+                        {
+                            if (string.IsNullOrEmpty(entryPoints[2]))
+                            {
+                                methodName = NETFramework.CodeEntryPoint.MethodNameDefault;
+                            }
+                            else
+                            {
+                                methodName = entryPoints[2];
+                            }
+                        }
 
-                    //    Console.WriteLine("\nOutput Result:\n");
+                        // Create the code entry point object
+                        NETFramework.CodeEntryPoint codeEntryPoint = new NETFramework.CodeEntryPoint(namespaceName, className, methodName);
+                        Console.WriteLine("\nCode Entry Point:");
+                        Console.WriteLine("Entry Point: " + codeEntryPoint.EntryPoint);
+                        Console.WriteLine("Entry Method: " + codeEntryPoint.MethodName + "\n");
 
-                    //    // Invoke the code files
-                    //    bool compiledResult = NETFramework.Start(codeFiles, compileConstructor);
+                        // Get the referenced assemblies
+                        string referencedAssembliesList = args[3];
+                        string[] referencedAssemblies;
 
-                    //    Console.WriteLine("\nCompiled: " + compiledResult);
-                    //    break;
+                        if (string.IsNullOrEmpty(referencedAssembliesList) || referencedAssembliesList == "null")
+                        {
+                            referencedAssemblies = NETFramework.DefaultReferencedAssemblies;
+                        }
+                        else
+                        {
+                            referencedAssemblies = referencedAssembliesList.Split(Constants.Separator);
+                        }
+
+                        Console.WriteLine("Referenced Assemblies:");
+                        for (int i = 0; i < referencedAssemblies.Length; i++)
+                        {
+                            string referencedAssembly = referencedAssemblies[i];
+                            Console.WriteLine(referencedAssembly);
+                        }
+
+                        // Create the compiler constructor
+                        NETFramework.CompileConstructor compileConstructor = new NETFramework.CompileConstructor(codeEntryPoint, codeProvider, NETFramework.CompileConstructor.TargetFramework.v4, referencedAssemblies);
+
+                        // Get the source code file/s
+                        Console.WriteLine("\nSource Code File/s:");
+
+                        string sourceCodeLocations = args[4];
+                        string[] sourceCodeFiles = sourceCodeLocations.Split(Constants.Separator);
+
+                        // Display the source code file/s
+                        for (int i = 0; i < sourceCodeFiles.Length; i++)
+                        {
+                            string sourceCodeFile = sourceCodeFiles[i];
+                            Console.WriteLine(sourceCodeFile);
+                        }
+
+                        // Output the result
+                        Console.WriteLine("\nOutput:\n");
+
+                        // Invoke the code files
+                        bool compiledResult = NETFramework.Start(sourceCodeFiles, compileConstructor);
+
+                        // Compile result
+                        if(!compiledResult)
+                        {
+                            Console.WriteLine();
+                        }
+                        Console.WriteLine("Compiled: " + compiledResult);
+                        break;
 
                     case "debug":
                         for (int i = 0; i < args.Length; i++)

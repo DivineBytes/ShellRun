@@ -12,10 +12,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Code\VisualBasic\Program.vb" />
+    <None Remove="Code\VisualBasic\Utilities.vb" />
     <None Remove="Scripts\VBScript.vbs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Code\VisualBasic\Program.vb" />
+    <Content Include="Code\VisualBasic\Utilities.vb" />
     <Content Include="Icon.ico" />
     <Content Include="Scripts\VBScript.vbs" />
   </ItemGroup>

@@ -15,13 +15,12 @@
 <h2 align="center">⭐ Features ⭐</h2>
 
 <p align="center">CLSID</p>
-<p align="center">Code (C#, Visual Basic)</p>
+<p align="center">Code (Batch, C#, PowerShell, VBScript)</p>
 <p align="center">Control Panel Applet</p>
 <p align="center">Microsoft Management Console</p>
 <p align="center">MS-Setting</p>
 <p align="center">Run Dialog</p>
 <p align="center">RunDLL32</p>
-<p align="center">Scripts (Command Prompt, PowerShell, VBScript)</p>
 <p align="center">Shell</p>
 
 <h2 align="center">⚖️ License ⚖️</h2>
