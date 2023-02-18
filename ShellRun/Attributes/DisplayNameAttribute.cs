@@ -62,8 +62,7 @@ namespace ShellRun.Attributes
                 return true;
             }
 
-            DisplayNameAttribute displayNameAttribute = obj as DisplayNameAttribute;
-            if (displayNameAttribute != null)
+            if (obj is DisplayNameAttribute displayNameAttribute)
             {
                 return displayNameAttribute.DisplayName == DisplayName;
             }
