@@ -1,4 +1,5 @@
 ﻿using ShellRun.Base;
+using ShellRun.Properties;
 using ShellRun.Utilities;
 using System;
 using System.Diagnostics;
@@ -42,24 +43,24 @@ namespace ShellRun.Modules
         /// path - Cannot be null.</exception>
         public Shell(string name, string guid = "", string description = "", string path = "") : this()
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name), "Cannot be null.");
+                throw new ArgumentNullException(nameof(name), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
             if (guid == null)
             {
-                throw new ArgumentNullException(nameof(guid), "Cannot be null.");
+                throw new ArgumentNullException(nameof(guid), Settings.Default.Arg_CannotBeNull);
             }
 
             if (description == null)
             {
-                throw new ArgumentNullException(nameof(description), "Cannot be null.");
+                throw new ArgumentNullException(nameof(description), Settings.Default.Arg_CannotBeNull);
             }
 
             if (path == null)
             {
-                throw new ArgumentNullException(nameof(path), "Cannot be null.");
+                throw new ArgumentNullException(nameof(path), Settings.Default.Arg_CannotBeNull);
             }
 
             Name = name;
@@ -124,7 +125,7 @@ namespace ShellRun.Modules
         {
             if (shell == null)
             {
-                throw new ArgumentNullException(nameof(shell), "Cannot be null.");
+                throw new ArgumentNullException(nameof(shell), Settings.Default.Arg_CannotBeNull);
             }
 
             return string.Format("\"{0}{1}\"", ShellCommand, shell.Name);

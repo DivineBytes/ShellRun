@@ -1,4 +1,5 @@
 ﻿using ShellRun.Base;
+using ShellRun.Properties;
 using ShellRun.Utilities;
 using System;
 using System.Collections.Generic;
@@ -45,12 +46,12 @@ namespace ShellRun.Modules
         {
             if (name == null)
             {
-                throw new ArgumentNullException(nameof(name), "Cannot be null.");
+                throw new ArgumentNullException(nameof(name), Settings.Default.Arg_CannotBeNull);
             }
 
             if (guid == null)
             {
-                throw new ArgumentNullException(nameof(guid), "Cannot be null.");
+                throw new ArgumentNullException(nameof(guid), Settings.Default.Arg_CannotBeNull);
             }
 
             Name = name;

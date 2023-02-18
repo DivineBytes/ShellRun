@@ -1,4 +1,5 @@
 ﻿using ShellRun.Base;
+using ShellRun.Properties;
 using ShellRun.Utilities;
 using System;
 using System.IO;
@@ -6,11 +7,16 @@ using System.IO;
 namespace ShellRun.Modules
 {
     /// <summary>
-    /// The <see cref="PowerShell" /> class.
+    /// The <see cref="PowerShell"/> class.
     /// </summary>
-    /// <seealso cref="ShellRun.Base.ScriptBase" />
+    /// <seealso cref="ShellRun.Base.ScriptBase"/>
     public class PowerShell : ScriptBase
     {
+        /// <summary>
+        /// The command prefix.
+        /// </summary>
+        public const string CommandPrefix = "-NoProfile -ExecutionPolicy ByPass -File";
+
         /// <summary>
         /// The executable file.
         /// </summary>
@@ -19,12 +25,8 @@ namespace ShellRun.Modules
         /// <summary>
         /// The 64-bit directory.
         /// </summary>
-        /// <value>
-        /// The directory64 bit.
-        /// </value>
-        /// <remarks>
-        /// Example: C:\Windows\System32\WindowsPowerShell\v1.0\
-        /// </remarks>
+        /// <value>The directory64 bit.</value>
+        /// <remarks>Example: C:\Windows\System32\WindowsPowerShell\v1.0\</remarks>
         public static DirectoryInfo Directory64Bit
         {
             get
@@ -36,12 +38,8 @@ namespace ShellRun.Modules
         /// <summary>
         /// The 32-bit directory.
         /// </summary>
-        /// <value>
-        /// The directory32 bit.
-        /// </value>
-        /// <remarks>
-        /// Example: C:\Windows\SysWOW64\WindowsPowerShell\v1.0\
-        /// </remarks>
+        /// <value>The directory32 bit.</value>
+        /// <remarks>Example: C:\Windows\SysWOW64\WindowsPowerShell\v1.0\</remarks>
         public static DirectoryInfo Directory32Bit
         {
             get
@@ -53,9 +51,7 @@ namespace ShellRun.Modules
         /// <summary>
         /// The PowerShell 64-Bit file info.
         /// </summary>
-        /// <value>
-        /// The powershell64.
-        /// </value>
+        /// <value>The powershell64.</value>
         public static FileInfo Powershell64
         {
             get
@@ -68,9 +64,7 @@ namespace ShellRun.Modules
         /// <summary>
         /// The PowerShell 32-Bit file info.
         /// </summary>
-        /// <value>
-        /// The powershell32.
-        /// </value>
+        /// <value>The powershell32.</value>
         public static FileInfo Powershell32
         {
             get
@@ -90,20 +84,18 @@ namespace ShellRun.Modules
         /// <param name="prefix">The prefix command.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">
-        /// powershellFile - Cannot be null or empty.
-        /// or
-        /// prefix - Cannot be null or empty.
+        /// powershellFile - Cannot be null or empty. or prefix - Cannot be null or empty.
         /// </exception>
-        public static bool Start(string powershellFile, string arguments = "", bool runAsAdmin = false, bool createNoWindow = false, string prefix = "-NoProfile -ExecutionPolicy ByPass -File")
+        public static bool Start(string powershellFile, string arguments = "", bool runAsAdmin = false, bool createNoWindow = false, string prefix = CommandPrefix)
         {
             if (string.IsNullOrEmpty(powershellFile))
             {
-                throw new ArgumentNullException(nameof(powershellFile), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(powershellFile), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
             if (string.IsNullOrEmpty(prefix))
             {
-                throw new ArgumentNullException(nameof(prefix), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(prefix), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
             string command;

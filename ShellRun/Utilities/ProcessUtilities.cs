@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShellRun.Properties;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -19,7 +20,7 @@ namespace ShellRun.Utilities
         {
             if (processStartInfo == null)
             {
-                throw new ArgumentNullException(nameof(processStartInfo), "Cannot be null");
+                throw new ArgumentNullException(nameof(processStartInfo), Settings.Default.Arg_CannotBeNull);
             }
 
             try
@@ -50,9 +51,9 @@ namespace ShellRun.Utilities
         /// <returns>The <see cref="bool"/>.</returns>
         public static bool StartProcess(string fileName, string arguments = "", bool runAsAdmin = false, bool createNoWindow = false, bool shellExecute = false)
         {
-            if (fileName == null)
+            if (string.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentNullException(nameof(fileName), "Cannot be null");
+                throw new ArgumentNullException(nameof(fileName), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
             FileInfo fileInfo = new FileInfo(fileName);
@@ -73,14 +74,14 @@ namespace ShellRun.Utilities
         /// <returns>The <see cref="bool"/>.</returns>
         public static bool StartProcess(string fileName, string arguments = "", string workingDirectory = "", bool runAsAdmin = false, bool createNoWindow = false, bool shellExecute = false)
         {
-            if (fileName == null)
+            if (string.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentNullException(nameof(fileName), "Cannot be null");
+                throw new ArgumentNullException(nameof(fileName), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
-            if (workingDirectory == null)
+            if (string.IsNullOrEmpty(workingDirectory))
             {
-                throw new ArgumentNullException(nameof(workingDirectory), "Cannot be null");
+                throw new ArgumentNullException(nameof(workingDirectory), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
             ProcessStartInfo processStartInfo = new ProcessStartInfo(fileName)

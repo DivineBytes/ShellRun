@@ -1,5 +1,6 @@
 ﻿using Microsoft.CSharp;
 using Microsoft.VisualBasic;
+using ShellRun.Properties;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -49,12 +50,12 @@ namespace ShellRun.Modules
         {
             if (sourceCodeFiles == null || sourceCodeFiles.Length == 0)
             {
-                throw new ArgumentNullException(nameof(sourceCodeFiles), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(sourceCodeFiles), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
             if (compileConstructor == null)
             {
-                throw new ArgumentNullException(nameof(compileConstructor), "Cannot be null.");
+                throw new ArgumentNullException(nameof(compileConstructor), Settings.Default.Arg_CannotBeNull);
             }
 
             string[] sources = new string[sourceCodeFiles.Length];
@@ -177,17 +178,17 @@ namespace ShellRun.Modules
             {
                 if (string.IsNullOrEmpty(namespaceName))
                 {
-                    throw new ArgumentNullException(nameof(namespaceName), "Cannot be null or empty.");
+                    throw new ArgumentNullException(nameof(namespaceName), Settings.Default.Arg_CannotBeNullOrEmpty);
                 }
 
                 if (string.IsNullOrEmpty(className))
                 {
-                    throw new ArgumentNullException(nameof(className), "Cannot be null or empty.");
+                    throw new ArgumentNullException(nameof(className), Settings.Default.Arg_CannotBeNullOrEmpty);
                 }
 
                 if (string.IsNullOrEmpty(methodName))
                 {
-                    throw new ArgumentNullException(nameof(methodName), "Cannot be null or empty.");
+                    throw new ArgumentNullException(nameof(methodName), Settings.Default.Arg_CannotBeNullOrEmpty);
                 }
 
                 Namespace = namespaceName;
@@ -301,7 +302,7 @@ namespace ShellRun.Modules
             {
                 if (codeEntryPoint == null)
                 {
-                    throw new ArgumentNullException(nameof(codeEntryPoint), "Cannot be null.");
+                    throw new ArgumentNullException(nameof(codeEntryPoint), Settings.Default.Arg_CannotBeNull);
                 }
 
                 CodeEntryPoint = codeEntryPoint;

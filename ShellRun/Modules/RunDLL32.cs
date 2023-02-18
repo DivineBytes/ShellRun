@@ -1,4 +1,5 @@
 ﻿using ShellRun.Base;
+using ShellRun.Properties;
 using ShellRun.Utilities;
 using System;
 using System.IO;
@@ -46,22 +47,22 @@ namespace ShellRun.Modules
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(name), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
             if (string.IsNullOrEmpty(dllName))
             {
-                throw new ArgumentNullException(nameof(dllName), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(dllName), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
             if (string.IsNullOrEmpty(entryPoint))
             {
-                throw new ArgumentNullException(nameof(entryPoint), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(entryPoint), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
             if (arguments == null)
             {
-                throw new ArgumentNullException(nameof(arguments), "Cannot be null.");
+                throw new ArgumentNullException(nameof(arguments), Settings.Default.Arg_CannotBeNull);
             }
 
             Name = name;
@@ -157,12 +158,12 @@ namespace ShellRun.Modules
 
             if (string.IsNullOrEmpty(dllName))
             {
-                throw new ArgumentNullException(nameof(dllName), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(dllName), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
             if (string.IsNullOrEmpty(entryPoint))
             {
-                throw new ArgumentNullException(nameof(entryPoint), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(entryPoint), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
             string argument;

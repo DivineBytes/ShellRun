@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using ShellRun.Containers;
+using ShellRun.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,11 @@ namespace ShellRun.Modules
         /// The MRU List.
         /// </summary>
         private const string MRUList = "MRUList";
+
+        /// <summary>
+        /// The default text.
+        /// </summary>
+        public const string DefaultText = "Type the name of a program, folder, document, or Internet resource, and Windows will open it for you.";
 
         /// <summary>
         /// The <see cref="RunFileDialogFlags"/>.
@@ -80,7 +86,7 @@ namespace ShellRun.Modules
         /// <param name="text">The dialog body text.</param>
         /// <param name="workingDirectory">The working directory.</param>
         /// <param name="runFileDialogFlags">The run file dialog flags.</param>
-        public static void Show(string title = "Run", string text = "Type the name of a program, folder, document, or Internet resource, and Windows will open it for you.", string workingDirectory = "", RunFileDialogFlags runFileDialogFlags = RunFileDialogFlags.CalcDirectory)
+        public static void Show(string title = "Run", string text = DefaultText, string workingDirectory = "", RunFileDialogFlags runFileDialogFlags = RunFileDialogFlags.CalcDirectory)
         {
             if (string.IsNullOrEmpty(workingDirectory))
             {
@@ -179,7 +185,7 @@ namespace ShellRun.Modules
         {
             if (string.IsNullOrEmpty(command))
             {
-                throw new ArgumentNullException(nameof(command), "Cannot be null");
+                throw new ArgumentNullException(nameof(command), Settings.Default.Arg_CannotBeNull);
             }
 
             try

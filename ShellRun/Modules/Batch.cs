@@ -1,4 +1,5 @@
 ﻿using ShellRun.Base;
+using ShellRun.Properties;
 using ShellRun.Utilities;
 using System;
 using System.IO;
@@ -44,7 +45,7 @@ namespace ShellRun.Modules
         {
             if (string.IsNullOrEmpty(batchFile))
             {
-                throw new ArgumentNullException(nameof(batchFile), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(batchFile), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
             return ProcessUtilities.StartProcess(batchFile, arguments, runAsAdmin, createNoWindow, true);

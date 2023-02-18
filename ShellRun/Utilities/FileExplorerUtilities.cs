@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShellRun.Properties;
+using System;
 using System.Diagnostics;
 using System.IO;
 
@@ -24,6 +25,11 @@ namespace ShellRun.Utilities
         /// <returns>The <see cref="bool"/>.</returns>
         public static bool Show(DirectoryInfo directory, bool selectFile = false, string fileName = "")
         {
+            if (directory == null)
+            {
+                throw new ArgumentNullException(nameof(directory), Settings.Default.Arg_CannotBeNull);
+            }
+
             return Show(directory.FullName, selectFile, fileName);
         }
 
@@ -36,6 +42,11 @@ namespace ShellRun.Utilities
         /// <returns>The <see cref="bool"/>.</returns>
         public static bool Show(FileInfo fileInfo, bool selectFile = false)
         {
+            if (fileInfo == null)
+            {
+                throw new ArgumentNullException(nameof(fileInfo), Settings.Default.Arg_CannotBeNull);
+            }
+
             return Show(fileInfo.Directory, selectFile, fileInfo.Name);
         }
 

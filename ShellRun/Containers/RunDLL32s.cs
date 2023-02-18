@@ -1,4 +1,5 @@
 ﻿using ShellRun.Modules;
+using ShellRun.Properties;
 using System;
 using System.IO;
 
@@ -130,12 +131,12 @@ namespace ShellRun.Containers
         {
             if (string.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentNullException(nameof(fileName), "Cannot be null or empty.");
+                throw new ArgumentNullException(nameof(fileName), Settings.Default.Arg_CannotBeNullOrEmpty);
             }
 
             if (!File.Exists(fileName))
             {
-                throw new FileNotFoundException("The file cannot be found.", fileName);
+                throw new FileNotFoundException(Settings.Default.Arg_FileNotFound, fileName);
             }
 
             try
