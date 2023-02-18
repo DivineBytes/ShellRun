@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ShellRun")]
-[assembly: AssemblyDescription("Automate the running of shell commands.")]
+[assembly: AssemblyDescription("Run code and commands with ease.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DivineBytes")]
 [assembly: AssemblyProduct("ShellRun")]

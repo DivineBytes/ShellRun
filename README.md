@@ -1,6 +1,6 @@
 <h1 align="center">ShellRun</h1>
 
-<p align="center">Run code, commands and scripts with ease.</p>
+<p align="center">Run code and commands with ease.</p>
 
 <p align="center">
 <img src="ShellRun\Resources\Logo.png" alt="Logo" width="64" />
