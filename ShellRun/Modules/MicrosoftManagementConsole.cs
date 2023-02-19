@@ -1,5 +1,4 @@
 ﻿using ShellRun.Base;
-using ShellRun.Properties;
 using ShellRun.Utilities;
 using System;
 using System.Collections.Generic;
@@ -8,18 +7,18 @@ using System.Diagnostics;
 namespace ShellRun.Modules
 {
     /// <summary>
-    /// The <see cref="MicrosoftManagementConsole" />.
+    /// The <see cref="MicrosoftManagementConsole"/>.
     /// </summary>
-    /// <seealso cref="ShellRun.Base.CommandBase" />
+    /// <seealso cref="ShellRun.Base.CommandBase"/>
     public class MicrosoftManagementConsole : CommandBase
     {
         /// <summary>
-        /// The empty <see cref="MicrosoftManagementConsole" />.
+        /// The empty <see cref="MicrosoftManagementConsole"/>.
         /// </summary>
         public static MicrosoftManagementConsole Empty = new MicrosoftManagementConsole();
 
         /// <summary>
-        /// The <see cref="Category" />.
+        /// The <see cref="Category"/>.
         /// </summary>
         public class Category
         {
@@ -80,7 +79,7 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// The <see cref="MicrosoftManagementConsole" />.
+        /// The <see cref="MicrosoftManagementConsole"/>.
         /// </summary>
         private MicrosoftManagementConsole()
         {
@@ -90,17 +89,13 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// The <see cref="MicrosoftManagementConsole" />.
+        /// The <see cref="MicrosoftManagementConsole"/>.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="command">The command.</param>
         /// <param name="categorys">The categorys.</param>
         /// <exception cref="System.ArgumentNullException">
-        /// name - Cannot be null.
-        /// or
-        /// command - Cannot be null.
-        /// or
-        /// categorys - Cannot be null.
+        /// name - Cannot be null. or command - Cannot be null. or categorys - Cannot be null.
         /// </exception>
         public MicrosoftManagementConsole(string name, string command, List<string> categorys) : this()
         {
@@ -127,25 +122,19 @@ namespace ShellRun.Modules
         /// <summary>
         /// The name.
         /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
+        /// <value>The name.</value>
         public string Name { get; private set; }
 
         /// <summary>
         /// The command.
         /// </summary>
-        /// <value>
-        /// The command.
-        /// </value>
+        /// <value>The command.</value>
         public string Command { get; private set; }
 
         /// <summary>
         /// The category.
         /// </summary>
-        /// <value>
-        /// The categorys.
-        /// </value>
+        /// <value>The categorys.</value>
         public List<string> Categorys { get; private set; }
 
 #pragma warning disable 1591

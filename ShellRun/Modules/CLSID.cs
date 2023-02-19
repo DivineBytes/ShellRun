@@ -1,5 +1,4 @@
 ﻿using ShellRun.Base;
-using ShellRun.Properties;
 using ShellRun.Utilities;
 using System;
 using System.Collections.Generic;
@@ -8,13 +7,13 @@ using System.Diagnostics;
 namespace ShellRun.Modules
 {
     /// <summary>
-    /// The <see cref="CLSID" /> class.
+    /// The <see cref="CLSID"/> class.
     /// </summary>
-    /// <seealso cref="ShellRun.Base.CommandBase" />
+    /// <seealso cref="ShellRun.Base.CommandBase"/>
     public class CLSID : CommandBase
     {
         /// <summary>
-        /// The empty <see cref="CLSID" />.
+        /// The empty <see cref="CLSID"/>.
         /// </summary>
         public static CLSID Empty = new CLSID();
 
@@ -24,7 +23,7 @@ namespace ShellRun.Modules
         public const string ShellCommand = "shell:::";
 
         /// <summary>
-        /// The <see cref="CLSID" />.
+        /// The <see cref="CLSID"/>.
         /// </summary>
         private CLSID()
         {
@@ -33,14 +32,12 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// The <see cref="CLSID" />.
+        /// The <see cref="CLSID"/>.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="guid">The guid.</param>
         /// <exception cref="System.ArgumentNullException">
-        /// name - Cannot be null.
-        /// or
-        /// guid - Cannot be null.
+        /// name - Cannot be null. or guid - Cannot be null.
         /// </exception>
         public CLSID(string name, List<string> guid) : this()
         {
@@ -61,25 +58,19 @@ namespace ShellRun.Modules
         /// <summary>
         /// The name.
         /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
+        /// <value>The name.</value>
         public string Name { get; private set; }
 
         /// <summary>
         /// The GUIDS.
         /// </summary>
-        /// <value>
-        /// The guids.
-        /// </value>
+        /// <value>The guids.</value>
         public List<string> GUIDS { get; private set; }
 
         /// <summary>
         /// The count.
         /// </summary>
-        /// <value>
-        /// The count.
-        /// </value>
+        /// <value>The count.</value>
         public int Count
         {
             get
@@ -91,9 +82,7 @@ namespace ShellRun.Modules
         /// <summary>
         /// The command.
         /// </summary>
-        /// <value>
-        /// The command.
-        /// </value>
+        /// <value>The command.</value>
         public string Command
         {
             get
@@ -105,9 +94,7 @@ namespace ShellRun.Modules
         /// <summary>
         /// The GUID.
         /// </summary>
-        /// <value>
-        /// The unique identifier.
-        /// </value>
+        /// <value>The unique identifier.</value>
         public string GUID
         {
             get

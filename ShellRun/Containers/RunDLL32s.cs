@@ -1,5 +1,4 @@
 ﻿using ShellRun.Modules;
-using ShellRun.Properties;
 using System;
 using System.IO;
 

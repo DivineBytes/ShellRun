@@ -1,5 +1,4 @@
 ﻿using ShellRun.Base;
-using ShellRun.Properties;
 using ShellRun.Utilities;
 using System;
 using System.Collections.Generic;
@@ -8,18 +7,18 @@ using System.Diagnostics;
 namespace ShellRun.Modules
 {
     /// <summary>
-    /// The <see cref="ControlPanelApplet" />.
+    /// The <see cref="ControlPanelApplet"/>.
     /// </summary>
-    /// <seealso cref="ShellRun.Base.CommandBase" />
+    /// <seealso cref="ShellRun.Base.CommandBase"/>
     public class ControlPanelApplet : CommandBase
     {
         /// <summary>
-        /// The empty <see cref="ControlPanelApplet" />.
+        /// The empty <see cref="ControlPanelApplet"/>.
         /// </summary>
         public static ControlPanelApplet Empty = new ControlPanelApplet();
 
         /// <summary>
-        /// The <see cref="ControlPanelApplet" />.
+        /// The <see cref="ControlPanelApplet"/>.
         /// </summary>
         private ControlPanelApplet()
         {
@@ -28,14 +27,12 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// The <see cref="ControlPanelApplet" />.
+        /// The <see cref="ControlPanelApplet"/>.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="commands">The commands.</param>
         /// <exception cref="System.ArgumentNullException">
-        /// name - Cannot be null.
-        /// or
-        /// commands - Cannot be null.
+        /// name - Cannot be null. or commands - Cannot be null.
         /// </exception>
         public ControlPanelApplet(string name, List<string> commands) : this()
         {
@@ -56,25 +53,19 @@ namespace ShellRun.Modules
         /// <summary>
         /// The name.
         /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
+        /// <value>The name.</value>
         public string Name { get; private set; }
 
         /// <summary>
         /// The commands.
         /// </summary>
-        /// <value>
-        /// The commands.
-        /// </value>
+        /// <value>The commands.</value>
         public List<string> Commands { get; private set; }
 
         /// <summary>
         /// The command.
         /// </summary>
-        /// <value>
-        /// The command.
-        /// </value>
+        /// <value>The command.</value>
         public string Command
         {
             get

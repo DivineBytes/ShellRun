@@ -1,5 +1,4 @@
 ﻿using ShellRun.Base;
-using ShellRun.Properties;
 using ShellRun.Utilities;
 using System;
 using System.Diagnostics;
@@ -7,13 +6,13 @@ using System.Diagnostics;
 namespace ShellRun.Modules
 {
     /// <summary>
-    /// The <see cref="Shell" />.
+    /// The <see cref="Shell"/>.
     /// </summary>
-    /// <seealso cref="ShellRun.Base.CommandBase" />
+    /// <seealso cref="ShellRun.Base.CommandBase"/>
     public class Shell : CommandBase
     {
         /// <summary>
-        /// The empty <see cref="Shell" />.
+        /// The empty <see cref="Shell"/>.
         /// </summary>
         public static Shell Empty = new Shell();
 
@@ -23,7 +22,7 @@ namespace ShellRun.Modules
         public const string ShellCommand = "shell:";
 
         /// <summary>
-        /// The <see cref="Shell" />.
+        /// The <see cref="Shell"/>.
         /// </summary>
         private Shell()
         {
@@ -33,14 +32,16 @@ namespace ShellRun.Modules
         }
 
         /// <summary>
-        /// The <see cref="Shell" />.
+        /// The <see cref="Shell"/>.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="guid">The guid.</param>
         /// <param name="description">The description.</param>
         /// <param name="path">The path.</param>
-        /// <exception cref="System.ArgumentNullException">name - Cannot be null. or guid - Cannot be null. or description - Cannot be null. or
-        /// path - Cannot be null.</exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// name - Cannot be null. or guid - Cannot be null. or description - Cannot be null. or
+        /// path - Cannot be null.
+        /// </exception>
         public Shell(string name, string guid = "", string description = "", string path = "") : this()
         {
             if (string.IsNullOrEmpty(name))
@@ -72,41 +73,31 @@ namespace ShellRun.Modules
         /// <summary>
         /// The description.
         /// </summary>
-        /// <value>
-        /// The description.
-        /// </value>
+        /// <value>The description.</value>
         public string Description { get; private set; }
 
         /// <summary>
         /// The path.
         /// </summary>
-        /// <value>
-        /// The path.
-        /// </value>
+        /// <value>The path.</value>
         public string Path { get; private set; }
 
         /// <summary>
         /// The name.
         /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
+        /// <value>The name.</value>
         public string Name { get; private set; }
 
         /// <summary>
         /// The guid.
         /// </summary>
-        /// <value>
-        /// The unique identifier.
-        /// </value>
+        /// <value>The unique identifier.</value>
         public string GUID { get; private set; }
 
         /// <summary>
         /// The command.
         /// </summary>
-        /// <value>
-        /// The command.
-        /// </value>
+        /// <value>The command.</value>
         public string Command
         {
             get

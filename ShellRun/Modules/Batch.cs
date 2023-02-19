@@ -1,5 +1,4 @@
 ﻿using ShellRun.Base;
-using ShellRun.Properties;
 using ShellRun.Utilities;
 using System;
 using System.IO;
@@ -7,9 +6,9 @@ using System.IO;
 namespace ShellRun.Modules
 {
     /// <summary>
-    /// The <see cref="Batch" /> class.
+    /// The <see cref="Batch"/> class.
     /// </summary>
-    /// <seealso cref="ShellRun.Base.ScriptBase" />
+    /// <seealso cref="ShellRun.Base.ScriptBase"/>
     public class Batch : ScriptBase
     {
         /// <summary>
@@ -20,9 +19,7 @@ namespace ShellRun.Modules
         /// <summary>
         /// The Command Prompt file path.
         /// </summary>
-        /// <value>
-        /// The command prompt.
-        /// </value>
+        /// <value>The command prompt.</value>
         public static string CommandPrompt
         {
             get

@@ -1,6 +1,5 @@
 ﻿using Microsoft.CSharp;
 using Microsoft.VisualBasic;
-using ShellRun.Properties;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -102,7 +101,6 @@ namespace ShellRun.Modules
 
                         try
                         {
-
                             // Get the program entry method
                             MethodInfo main = program.GetMethod(compileConstructor.CodeEntryPoint.MethodName);
 

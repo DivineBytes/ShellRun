@@ -5,9 +5,5 @@
     /// </summary>
     public abstract class ScriptBase
     {
-        /// <summary>
-        /// Start the script.
-        /// </summary>
-        // public abstract bool Start();
     }
 }

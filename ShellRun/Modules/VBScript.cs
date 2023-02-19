@@ -1,5 +1,4 @@
 ﻿using ShellRun.Base;
-using ShellRun.Properties;
 using ShellRun.Utilities;
 using System;
 using System.ComponentModel;
@@ -8,17 +7,15 @@ using System.IO;
 namespace ShellRun.Modules
 {
     /// <summary>
-    /// The <see cref="VBScript" /> class.
+    /// The <see cref="VBScript"/> class.
     /// </summary>
-    /// <seealso cref="ShellRun.Base.ScriptBase" />
+    /// <seealso cref="ShellRun.Base.ScriptBase"/>
     public class VBScript : ScriptBase
     {
         /// <summary>
         /// The CScript file info.
         /// </summary>
-        /// <value>
-        /// The c script.
-        /// </value>
+        /// <value>The c script.</value>
         public static FileInfo CScript
         {
             get
@@ -33,9 +30,7 @@ namespace ShellRun.Modules
         /// <summary>
         /// The WScript file info.
         /// </summary>
-        /// <value>
-        /// The w script.
-        /// </value>
+        /// <value>The w script.</value>
         public static FileInfo WScript
         {
             get

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace ShellRun
 {
     /// <summary>
-    /// The <see cref="Program" /> class.
+    /// The <see cref="Program"/> class.
     /// </summary>
     internal class Program
     {
@@ -33,7 +33,8 @@ namespace ShellRun
                     case "code":
                         Console.WriteLine("Usage:");
                         Console.WriteLine("\"csharp\" \"Namespace;ClassName;MethodName\" \"System.dll;System.Windows.dll\" \"Folder\\Program.cs;Folder\\Utilities.cs\"");
-                        // Console.WriteLine("\"visualbasic\" \"AppName;Program;Main\" \"System.dll;System.Windows.dll\" \"Folder\\Program.vb;Folder\\Utilities.vb\"\n");
+                        // Console.WriteLine("\"visualbasic\" \"AppName;Program;Main\"
+                        // \"System.dll;System.Windows.dll\" \"Folder\\Program.vb;Folder\\Utilities.vb\"\n");
 
                         Console.WriteLine();
 
@@ -74,7 +75,7 @@ namespace ShellRun
                         string className = NETFramework.CodeEntryPoint.ClassNameDefault;
                         if (entryPoints.Length >= 2)
                         {
-                            if(string.IsNullOrEmpty(entryPoints[1]))
+                            if (string.IsNullOrEmpty(entryPoints[1]))
                             {
                                 className = NETFramework.CodeEntryPoint.ClassNameDefault;
                             }
@@ -146,7 +147,7 @@ namespace ShellRun
                         bool compiledResult = NETFramework.Start(sourceCodeFiles, compileConstructor);
 
                         // Compile result
-                        if(!compiledResult)
+                        if (!compiledResult)
                         {
                             Console.WriteLine();
                         }
